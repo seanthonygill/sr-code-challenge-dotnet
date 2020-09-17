@@ -1,0 +1,30 @@
+﻿Notes:
+
+- Found that the DirectReports List was not consistently being loaded. Enforced Eager Loading
+  on GetById by using Include on the DirectReports variable to prevent it from returning as null.
+  This could also be handled by ensuring Lazy Loading properly in DB Context setup, but for the purpose
+  of this exercise I am using Eager Loading.
+
+- A potential architecture change would be to not have the ReportingStructure and Compensation types
+- contain employee objects, but rather be part of the Employee model itself. If these types have a true
+- 1 to 1 relationship with an employee, it might make more sense to make them a part of the Employee
+- Model.
+
+- In most of the DDD files, I tried to follow the patterns that were already established by the other
+- implementations, but given the time, I might have added a bit more error checking at the
+- service and/or repository layers.
+
+- I have added comments at all sections where the logic would need explanation, but did not
+- excessively comment the standard context and repo functions in the interest of time. 
+- As a good example of how I usually comment functions, the recursive calcNumberOfReports is worth reviewing.
+
+- I chose to use the recursive approach for calcNumberOfReports because recursion is ideal for
+- tree traversal, which the Employee structure is. It creates an elegant solution that should be
+- much easier to read and debug. However, I do realize recursion can introduce performance and memory concerns.
+- In this simple case, I think the trade off is worth it.
+
+- As a side note, I followed the given testing patterns here and created unit tests for the api calls
+- created in this exercise. All tests run succesfully on my machine. Normally here, I might test the
+- service layer at the unit test level and then also utilize a tool like Postman to build a robust
+- API test suite.
+
